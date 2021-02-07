@@ -23,7 +23,7 @@ var api = new ParseServer({
 });
 
 var apiBolita = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  databaseURI: 'mongodb+srv://admin:i5fFKxKuJ45nBqc2@bolita.psvqk.mongodb.net/dev?retryWrites=true&w=majority',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'Bolita',
   masterKey: process.env.MASTER_KEY || 'Bolita', //Add your master key here. Keep it secret!
