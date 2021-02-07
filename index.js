@@ -21,6 +21,14 @@ var api = new ParseServer({
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
 });
+
+var apiBolita = new ParseServer({
+  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
+  appId: process.env.APP_ID || 'Bolita',
+  masterKey: process.env.MASTER_KEY || 'Bolita', //Add your master key here. Keep it secret!
+  serverURL: 'https://parse-server-mobile-builder.herokuapp.com/bolita',  // Don't forget to change to https if needed
+});
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
 // javascriptKey, restAPIKey, dotNetKey, clientKey
@@ -33,6 +41,8 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 // Serve the Parse API on the /parse URL prefix
 var mountPath = process.env.PARSE_MOUNT || '/parse';
 app.use(mountPath, api);
+app.use('/bolita', apiBolita);
+
 
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', function(req, res) {
